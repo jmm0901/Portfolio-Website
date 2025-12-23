@@ -195,44 +195,6 @@ if (menuBtn && navLinks) {
   });
 }
 
-// Resume button handler - open modal preview of /resume.pdf if available
-document.getElementById("resumeBtn").addEventListener("click", async function () {
-  const resumeUrl = "/files/12-16-2025_Malabanan_CV_V2.pdf";
-  let exists = false;
-  try {
-    const res = await fetch(resumeUrl, { method: "HEAD" });
-    exists = res.ok;
-  } catch (e) {
-    exists = false;
-  }
-
-  const modal = document.createElement("div");
-  modal.className = "resume-modal";
-  modal.innerHTML = `
-    <div class="resume-modal__backdrop"></div>
-    <div class="resume-modal__content" role="dialog" aria-modal="true">
-      <button class="resume-modal__close" aria-label="Close">✕</button>
-      <div class="resume-modal__body">
-        ${exists ? `<iframe src="${resumeUrl}" class="resume-modal__iframe"></iframe>` : `<div class="resume-modal__missing"><p>Resume not found at <code>/resume.pdf</code>.</p><p>Add a file named <strong>resume.pdf</strong> to the project root to enable preview.</p></div>`}
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-
-  const close = () => {
-    modal.remove();
-  };
-
-  modal.querySelector('.resume-modal__close').addEventListener('click', close);
-  modal.querySelector('.resume-modal__backdrop').addEventListener('click', close);
-
-  function onEsc(e) {
-    if (e.key === 'Escape') close();
-  }
-  document.addEventListener('keydown', onEsc, { once: true });
-});
-
 // Initialize
 createParticles();
 
@@ -276,3 +238,48 @@ if (window.elementSdk) {
     }
   }
 })();
+
+// Mobile menu toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  const navAnchors = navLinks.querySelectorAll('a');
+
+  // Toggle menu on button click
+  menuBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    navLinks.classList.toggle('hidden');
+  });
+
+  // Close menu when a link is clicked
+  navAnchors.forEach(anchor => {
+    anchor.addEventListener('click', function() {
+      navLinks.classList.add('hidden');
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function() {
+    navLinks.classList.add('hidden');
+  });
+});
+
+// Handle resume button click - show preview modal
+function handleResumeClick() {
+  const resumeModal = document.getElementById('resumeModal');
+  resumeModal.classList.remove('hidden');
+}
+
+// Close resume modal
+function closeResumeModal() {
+  const resumeModal = document.getElementById('resumeModal');
+  resumeModal.classList.add('hidden');
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(e) {
+  const resumeModal = document.getElementById('resumeModal');
+  if (e.target === resumeModal) {
+    closeResumeModal();
+  }
+});

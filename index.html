@@ -28,36 +28,42 @@
             <!-- mobile menu button -->
             <button
               id="menuBtn"
-              class="md:hidden p-2 rounded-md mr-3"
+              class="md:hidden flex flex-col gap-1.5 p-2 rounded-md mr-3 hover:bg-gray-100 transition-colors"
               aria-label="Open menu"
             >
-              ☰
+              <span class="w-6 h-0.5 bg-gray-800 block"></span>
+              <span class="w-6 h-0.5 bg-gray-800 block"></span>
+              <span class="w-6 h-0.5 bg-gray-800 block"></span>
             </button>
 
-            <div id="navLinks" class="hidden md:flex gap-6 items-center">
+            <div
+              id="navLinks"
+              class="hidden md:flex gap-6 items-center absolute md:relative top-full left-0 right-0 md:top-auto md:left-auto md:right-auto flex-col md:flex-row bg-white md:bg-transparent shadow-md md:shadow-none z-40"
+            >
               <a
                 href="#home"
-                class="nav-link text-gray-700 hover:text-purple-600"
+                class="nav-link text-gray-700 hover:text-purple-600 block md:inline px-6 md:px-0 py-2 md:py-0 w-full md:w-auto text-center md:text-left"
                 >Home</a
               >
               <a
                 href="#about"
-                class="nav-link text-gray-700 hover:text-purple-600"
+                class="nav-link text-gray-700 hover:text-purple-600 block md:inline px-6 md:px-0 py-2 md:py-0 w-full md:w-auto text-center md:text-left"
                 >About</a
               >
               <a
                 href="#projects"
-                class="nav-link text-gray-700 hover:text-purple-600"
+                class="nav-link text-gray-700 hover:text-purple-600 block md:inline px-6 md:px-0 py-2 md:py-0 w-full md:w-auto text-center md:text-left"
                 >Projects</a
               >
               <a
                 href="#contact"
-                class="nav-link text-gray-700 hover:text-purple-600"
+                class="nav-link text-gray-700 hover:text-purple-600 block md:inline px-6 md:px-0 py-2 md:py-0 w-full md:w-auto text-center md:text-left"
                 >Contact</a
               >
               <button
                 id="resumeBtn"
-                class="bg-gradient-to-r from-purple-600 to-purple-800 text-white px-5 py-2 rounded-lg hover:shadow-lg transition-shadow"
+                onclick="handleResumeClick()"
+                class="bg-gradient-to-r from-purple-600 to-purple-800 text-white px-5 py-2 rounded-lg hover:shadow-lg transition-shadow w-full md:w-auto"
               >
                 Resume
               </button>
@@ -90,7 +96,7 @@
             id="taglineDisplay"
             class="text-2xl md:text-3xl mb-6 text-purple-200"
           >
-            Data Science Intern
+            Aspiring Data Scientist
           </p>
           <p
             id="introDisplay"
@@ -206,7 +212,7 @@
                 >
                 <span
                   class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium"
-                  >R</span
+                  >Google Suite</span
                 >
                 <span
                   class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium"
@@ -214,11 +220,11 @@
                 >
                 <span
                   class="skill-tag bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium"
-                  >TensorFlow</span
+                  >Oracle Cloud Infrastructure</span
                 >
                 <span
                   class="skill-tag bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-medium"
-                  >Scikit-learn</span
+                  >Big Query</span
                 >
                 <span
                   class="skill-tag bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm font-medium"
@@ -230,7 +236,7 @@
                 >
                 <span
                   class="skill-tag bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium"
-                  >Power BI</span
+                  >Microsoft Suite</span
                 >
               </div>
             </div>
@@ -258,6 +264,10 @@
                 <span
                   class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium"
                   >Adaptability</span
+                >
+                <span
+                  class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium"
+                  >Documentation</span
                 >
               </div>
             </div>
@@ -498,6 +508,32 @@
           </div>
         </div>
       </section>
+      <!-- Resume Preview Modal -->
+      <div
+        id="resumeModal"
+        class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-2"
+      >
+        <div
+          class="bg-white rounded-lg shadow-2xl w-full max-w-6xl h-[95vh] flex flex-col"
+        >
+          <div class="flex justify-between items-center p-6 border-b">
+            <h2 class="text-2xl font-bold gradient-text">Resume Preview</h2>
+            <button
+              onclick="closeResumeModal()"
+              class="text-gray-500 hover:text-gray-700 text-2xl font-bold"
+            >
+              ×
+            </button>
+          </div>
+          <div class="flex-1 overflow-auto">
+            <iframe
+              src="/files/12-16-2025_Malabanan_CV_V2.pdf"
+              class="w-full h-full"
+              title="Resume Preview"
+            ></iframe>
+          </div>
+        </div>
+      </div>
       <!-- Footer -->
       <footer class="bg-gray-800 text-white py-6">
         <div class="max-w-6xl mx-auto px-6 text-center">
