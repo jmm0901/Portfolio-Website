@@ -1,0 +1,251 @@
+body {
+  box-sizing: border-box;
+}
+
+#home {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.animated-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 8px;
+  min-height: 8px;
+  padding: 0.1rem;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: float linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) translateX(80px);
+    opacity: 0;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+}
+
+.project-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+  color: white;
+  padding: 1.5rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-caption {
+  transform: translateY(0);
+}
+
+.carousel-container {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 1rem 0;
+  scrollbar-width: thin;
+  scrollbar-color: #667eea #f1f5f9;
+}
+
+.carousel-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.carousel-container::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 4px;
+}
+
+.certificate-card {
+  min-width: 280px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+.skill-tag {
+  transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #667eea;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.section {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.profile-placeholder {
+  width: 180px;
+  height: 180px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  color: white;
+  margin: 0 auto 1.5rem;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+/* Resume preview modal styles */
+.resume-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+.resume-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+.resume-modal__content {
+  position: relative;
+  width: min(90vw, 960px);
+  max-height: 90vh;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(2, 6, 23, 0.4);
+  z-index: 2;
+}
+.resume-modal__close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.resume-modal__body {
+  padding: 48px 24px 24px;
+  height: calc(90vh - 96px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.resume-modal__iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.resume-modal__missing {
+  text-align: center;
+  color: #333;
+  padding: 24px;
+}
+
+/* Small-screen performance and responsive tweaks */
+@media (max-width: 640px) {
+  .animated-bg {
+    display: none;
+  }
+
+  .profile-placeholder {
+    width: 120px;
+    height: 120px;
+    font-size: 3rem;
+  }
+
+  /* Nav dropdown appearance on mobile when shown (we toggle the 'hidden' class) */
+  #navLinks {
+    position: absolute;
+    top: 64px;
+    right: 16px;
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.15);
+    display: flex !important;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 60;
+  }
+}
