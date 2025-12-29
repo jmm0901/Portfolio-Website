@@ -180,20 +180,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// Mobile nav toggle
-const menuBtn = document.getElementById('menuBtn');
-const navLinks = document.getElementById('navLinks');
-if (menuBtn && navLinks) {
-  menuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('hidden');
-  });
-  // close menu when a link is clicked (mobile)
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      if (window.innerWidth < 768) navLinks.classList.add('hidden');
-    });
-  });
-}
+// Mobile nav toggle - Removed duplicate code (see DOMContentLoaded handler below)
 
 // Initialize
 createParticles();
@@ -243,24 +230,35 @@ if (window.elementSdk) {
 document.addEventListener('DOMContentLoaded', function() {
   const menuBtn = document.getElementById('menuBtn');
   const navLinks = document.getElementById('navLinks');
-  const navAnchors = navLinks.querySelectorAll('a');
+
+  if (!menuBtn || !navLinks) {
+    console.error('Menu button or nav links not found');
+    return;
+  }
 
   // Toggle menu on button click
   menuBtn.addEventListener('click', function(e) {
+    e.preventDefault();
     e.stopPropagation();
     navLinks.classList.toggle('hidden');
+    console.log('Menu toggled, hidden:', navLinks.classList.contains('hidden'));
   });
 
-  // Close menu when a link is clicked
-  navAnchors.forEach(anchor => {
-    anchor.addEventListener('click', function() {
+  // Close menu when any nav item is clicked (links and buttons)
+  const navItems = navLinks.querySelectorAll('a, button');
+  navItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.stopPropagation();
       navLinks.classList.add('hidden');
     });
   });
 
   // Close menu when clicking outside
-  document.addEventListener('click', function() {
-    navLinks.classList.add('hidden');
+  document.addEventListener('click', function(e) {
+    // Check if click is outside navLinks and not on menuBtn
+    if (!navLinks.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) {
+      navLinks.classList.add('hidden');
+    }
   });
 });
 

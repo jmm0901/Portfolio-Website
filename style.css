@@ -241,17 +241,33 @@ body {
   }
 
   /* Nav dropdown appearance on mobile when shown (we toggle the 'hidden' class) */
-  #navLinks {
-    position: absolute;
+  #navLinks:not(.hidden) {
+    position: fixed;
     top: 64px;
-    right: 16px;
+    left: 0;
+    right: 0;
     background: white;
-    border-radius: 8px;
-    padding: 12px;
+    border-radius: 0;
+    padding: 12px 0;
     box-shadow: 0 10px 30px rgba(2, 6, 23, 0.15);
-    display: flex !important;
+    display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0;
     z-index: 60;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  #navLinks:not(.hidden) a {
+    padding: 14px 24px !important;
+    margin: 0;
+    text-align: left;
+  }
+
+  #navLinks:not(.hidden) #resumeBtn {
+    padding: 14px 24px !important;
+    margin: 12px 24px;
+    width: auto;
+    background: linear-gradient(to right, #7c3aed, #6d28d9) !important;
   }
 }
